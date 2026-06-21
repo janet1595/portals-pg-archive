@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信息卡片 · 理解 PG 主题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fde9d8 0%, #f7d4b5 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .page-wrapper {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* 主视觉卡片 = hero */
+        .hero-card {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -12px rgba(180, 100, 50, 0.20);
+            padding: 3rem 2.5rem;
+            margin-bottom: 2.5rem;
+            transition: transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -20%;
+            width: 200%;
+            height: 180%;
+            background: radial-gradient(circle at 30% 40%, rgba(248, 195, 150, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 550;
+            color: #3e2c1b;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: #73563b;
+            margin-top: 1rem;
+            max-width: 600px;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: #e9d6c0;
+            color: #4a3422;
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 1.5rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* 双列网格：用途卡片 + 适合人群 */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 26px;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 12px 28px -10px rgba(140, 90, 40, 0.12);
+            transition: all 0.2s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 32px -12px rgba(130, 80, 35, 0.18);
+        }
+
+        .card-heading {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2f2012;
+            border-bottom: 3px solid #f1d7c0;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .card-content {
+            color: #3e3124;
+            line-height: 1.65;
+            font-size: 0.98rem;
+        }
+
+        .card-content p {
+            margin-bottom: 0.8rem;
+        }
+
+        .card-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card-content li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .card-content li::before {
+            content: '·';
+            position: absolute;
+            left: 0.25rem;
+            color: #b47c56;
+            font-weight: 700;
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.8rem;
+        }
+
+        .tag {
+            background: #f3e4d6;
+            color: #4f3928;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 450;
+        }
+
+        /* 自然链接段落卡片 - 全文背景 */
+        .link-card {
+            background: white;
+            border-radius: 28px;
+            padding: 2.2rem 2.2rem 2rem;
+            box-shadow: 0 10px 24px -8px rgba(130, 80, 40, 0.08);
+            margin-bottom: 2.2rem;
+        }
+
+        .link-card p {
+            color: #3b2d1e;
+            line-height: 1.7;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .link-card strong {
+            color: #63442b;
+        }
+
+        .link-card a {
+            color: #9f6b3f;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.1rem 0.3rem;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+            background: #f6ede4;
+        }
+
+        .link-card a:hover {
+            background: #dbbd9f;
+            color: #2d1c0e;
+        }
+
+        /* FAQ 摘要卡片 (单列) */
+        .faq-card {
+            background: white;
+            border-radius: 26px;
+            padding: 2rem 2rem;
+            box-shadow: 0 8px 20px -6px rgba(100, 60, 25, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .faq-item {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #eedbcb;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 550;
+            color: #3a291b;
+            display: block;
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .faq-a {
+            color: #5c4a38;
+            font-size: 0.93rem;
+            line-height: 1.5;
+            padding-left: 0.8rem;
+        }
+
+        .faq-a a {
+            color: #9f6b3f;
+            font-weight: 500;
+            background: #f4e4d6;
+            padding: 0.05rem 0.3rem;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .faq-a a:hover {
+            background: #dfc4ab;
+            color: #281c10;
+        }
+
+        /* 小水印 + 氛围 */
+        .footnote {
+            text-align: center;
+            color: #8a6e55;
+            font-size: 0.75rem;
+            margin-top: 1rem;
+            opacity: 0.6;
+            letter-spacing: 0.5px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 780px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .hero-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .link-card,
+            .faq-card,
+            .info-card {
+                padding: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+
+            .hero-title {
+                font-size: 1.5rem;
+            }
+
+            .card-heading {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- 主视觉卡片 -->
+    <div class="hero-card">
+        <h1 class="hero-title">主题笔记 · 理解 PG 的观察方式</h1>
+        <p class="hero-sub">
+            从结构到隐喻，从概念到场景——这里以信息卡片的形式梳理围绕 PG 主题的常见讨论维度，便于快速建立认知锚点。
+        </p>
+        <span class="hero-tag">知识型 · 主题索引</span>
+    </div>
+
+    <!-- 双列：用途卡片 + 适合人群 -->
+    <div class="grid-2col">
+        <!-- 用途卡片 -->
+        <div class="info-card">
+            <div class="card-heading">📋 常见用途</div>
+            <div class="card-content">
+                <p>PG 主题常被用于描述一种结构化的逻辑环境，其核心在于“通道”与“边界”的设定。在实际讨论中，以下场景较为典型：</p>
+                <ul>
+                    <li>信息流的路径设计：定义节点之间的连接规则。</li>
+                    <li>权限与可见性分层：根据不同角色划定可访问范围。</li>
+                    <li>状态机的抽象表达：将离散状态映射为可切换的入口。</li>
+                </ul>
+                <div class="tag-group">
+                    <span class="tag">路径设计</span>
+                    <span class="tag">分层可见</span>
+                    <span class="tag">状态映射</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 适合人群 -->
+        <div class="info-card">
+            <div class="card-heading">🧭 适合关注的人群</div>
+            <div class="card-content">
+                <p>如果你属于以下任意一类，可能会对这个主题的讨论框架产生兴趣：</p>
+                <ul>
+                    <li>对信息架构、交互逻辑有研究兴趣的思考者。</li>
+                    <li>需要为抽象规则寻找具象表达的设计与策划角色。</li>
+                    <li>关注系统边界与可控性的技术爱好者。</li>
+                    <li>在内容组织或知识管理领域探索方法论的人。</li>
+                </ul>
+                <p style="margin-top: 0.6rem; font-size: 0.9rem; color: #7a624b;">以上仅作参考，实际兴趣边界更为开放。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 自然链接段落卡片 -->
+    <div class="link-card">
+        <p><strong>关于主题的进一步延伸</strong> —— 如果你希望了解该主题在实际项目或讨论中的具体语境，<a href="https://portals-pg.com">pg官网</a> 提供了更系统的背景说明与文档索引。该站点以模块化方式呈现相关概念，适合作为主题研究的起始参考点。</p>
+        <p>信息卡片中的分类仅选取了部分角度，完整的图谱往往涉及更多交叉领域。例如，结构设计与角色模型的配合方式，常常需要结合具体案例才能获得更深的理解。</p>
+        <p style="font-size: 0.92rem; color: #6d5641;">提示：任何抽象框架的价值，最终取决于它能否帮助使用者更清晰地观察自己的问题域。</p>
+    </div>
+
+    <!-- FAQ 摘要卡片 -->
+    <div class="faq-card">
+        <div style="font-size: 1.3rem; font-weight: 500; color: #352515; margin-bottom: 1rem;">常见疑问摘要</div>
+
+        <div class="faq-item">
+            <span class="faq-q">“PG 主题” 是一个固定产品吗？</span>
+            <div class="faq-a">更多时候它指代一种概念集合或设计思路，而非单一体。不同资料中对其定义有细微差别，建议结合具体文档理解。可参考 <a href="https://portals-pg.com">pg官网</a> 中的术语说明。</div>
+        </div>
+
+        <div class="faq-item">
+            <span class="faq-q">如何快速建立对 PG 的基本印象？</span>
+            <div class="faq-a">可以先从“通道 / 门户”这个意象入手，观察它如何连接不同的信息区域。许多介绍都会从边界与入口的对比展开。</div>
+        </div>
+
+        <div class="faq-item">
+            <span class="faq-q">这些卡片里的分类是唯一标准吗？</span>
+            <div class="faq-a">不是。此处分类仅为帮助梳理思路，实际应用中不同背景的人会有自己的解读框架。建议保持开放态度，对比多种资料。</div>
+        </div>
+    </div>
+
+    <div class="footnote">基于公开信息的整理 · 仅用于概念介绍</div>
+
+</div>
+</body>
+</html>
