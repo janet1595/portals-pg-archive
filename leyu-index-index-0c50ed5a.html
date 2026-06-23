@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>乐鱼 · 日常查询与延伸阅读</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #fce4c7 0%, #f7d7b3 45%, #eac39b 100%);
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.2rem;
+      line-height: 1.6;
+      color: #2a241f;
+    }
+    .card {
+      max-width: 820px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 36px;
+      padding: 2.8rem 2.5rem;
+      box-shadow: 0 20px 40px rgba(168, 108, 58, 0.18), 0 6px 16px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: 0 26px 52px rgba(168, 108, 58, 0.20);
+    }
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 550;
+      letter-spacing: -0.02em;
+      color: #6d4c2f;
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+    .subhead {
+      font-size: 1.1rem;
+      color: #7a5c40;
+      border-left: 3px solid #dbb48b;
+      padding-left: 1.2rem;
+      margin-bottom: 2rem;
+      font-weight: 380;
+    }
+    .opener {
+      font-size: 1.15rem;
+      background: #f7efe4;
+      padding: 1rem 1.4rem;
+      border-radius: 50px;
+      margin-bottom: 1.8rem;
+      display: inline-block;
+      color: #4d3726;
+      font-weight: 430;
+    }
+    p {
+      margin-bottom: 1.25rem;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 1.6rem;
+      margin: 1.8rem 0 1.6rem;
+    }
+    .feature-item {
+      background: #faf5ed;
+      border-radius: 24px;
+      padding: 1.1rem 1.2rem;
+      transition: background 0.15s;
+    }
+    .feature-item:hover {
+      background: #f1e5d6;
+    }
+    .feature-item strong {
+      display: block;
+      font-weight: 570;
+      color: #5d3d26;
+      font-size: 1.05rem;
+      margin-bottom: 0.2rem;
+    }
+    .feature-item span {
+      font-size: 0.95rem;
+      color: #4f3b2d;
+      opacity: 0.88;
+    }
+    .link-button-like {
+      display: inline-block;
+      margin: 1rem 0 0.6rem;
+      background: #dbb48b;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 480;
+      transition: background 0.15s, color 0.15s;
+    }
+    .link-button-like a {
+      color: #2f231c;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    .link-button-like:hover {
+      background: #d0a377;
+    }
+    .closing-note {
+      margin-top: 2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid #e2cfba;
+      font-size: 0.95rem;
+      color: #5c4636;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-mini {
+      background: #f9f1e6;
+      border-radius: 28px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0 0.8rem;
+    }
+    .faq-mini summary {
+      font-weight: 510;
+      cursor: pointer;
+      color: #553b28;
+      padding: 0.2rem 0;
+    }
+    .faq-mini p {
+      margin: 0.6rem 0 0 0;
+      font-size: 0.93rem;
+      color: #523e2f;
+    }
+    hr {
+      border: none;
+      border-top: 1px dashed #d5bb9f;
+      margin: 1rem 0;
+      opacity: 0.6;
+    }
+    @media (max-width: 580px) {
+      .card {
+        padding: 1.8rem 1.2rem;
+        border-radius: 28px;
+      }
+      h1 {
+        font-size: 1.9rem;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+      }
+      .subhead {
+        font-size: 1rem;
+        padding-left: 0.9rem;
+      }
+      .opener {
+        font-size: 1rem;
+        padding: 0.7rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>乐鱼 · 日常信息流</h1>
+    <div class="subhead">查询、对照与延伸阅读的轻量聚合</div>
+
+    <div class="opener">从一条索引开始，让查询不再零碎。</div>
+
+    <p>日常工作中，我们频繁切换页面、翻找书签、比对零散数据。碎片信息越堆越多，但真正需要时却难以回溯。<strong><a href="https://leyu--index.com" style="color:#633f26; text-decoration:underline; text-underline-offset:3px;">乐鱼</a></strong>提供的是一套围绕“查、对、延”展开的轻结构——将常用资料、对照表和延伸线索组织在同一视线下，减少跳转损耗，让阅读本身更聚焦。</p>
+
+    <p>无论是快速检索某个条目，还是横向对比两组近似信息，抑或从当前内容顺藤摸瓜找到更深的材料，一个简洁的起点往往比大型平台更有效率。不求包罗万象，重点在于触手可及。</p>
+
+    <!-- 特点列表（卡片式） -->
+    <div class="feature-grid">
+      <div class="feature-item">
+        <strong>快速查询</strong>
+        <span>条目式索引，减少无关干扰；每次查询都能直接找到目标区域。</span>
+      </div>
+      <div class="feature-item">
+        <strong>对照视图</strong>
+        <span>并列呈现近似字段或数据，一目了然，方便横向比较。</span>
+      </div>
+      <div class="feature-item">
+        <strong>延伸入口</strong>
+        <span>每个结果附带不超过三条关联线索，引导自然深入的阅读。</span>
+      </div>
+      <div class="feature-item">
+        <strong>轻量结构</strong>
+        <span>无冗余模块，加载快，专注于查询本身而非页面装饰。</span>
+      </div>
+    </div>
+
+    <!-- 场景说明（保持简洁） -->
+    <p style="margin-bottom:0.2rem;"><strong>适用场景举例</strong><br>
+    整理文献时比对不同版本术语；查阅规范时快速定位条款编号；写作中确认名称、年份或数据引用。这些场景的共同点：信息密度中等，但需要反复折返对照。<a href="https://leyu--index.com" style="color:#633f26; text-decoration:underline; text-underline-offset:2px;">乐鱼</a>恰好填补了“浏览器标签太多”与“专用工具太沉”之间的空白。</p>
+
+    <!-- 类似FAQ摘要（交互式） -->
+    <details class="faq-mini">
+      <summary>常见疑问 · 摘要</summary>
+      <p><strong>Q：适合查哪些类型的内容？</strong> A：偏重事实型条目、短数据、对照表、名词解释、简要背景等。不适合长篇连载或富媒体流。</p>
+      <p><strong>Q：是否需要注册？</strong> A：不需要。直接使用，不涉及账户体系。</p>
+      <p><strong>Q：内容更新频率？</strong> A：根据来源及维护节奏更新，通常保持一定时效性。具体见站内提示。</p>
+    </details>
+
+    <hr>
+
+    <div class="closing-note">
+      <span>温和收束 · 每一次查询都应更从容</span>
+      <span class="link-button-like"><a href="https://leyu--index.com">乐鱼</a></span>
+    </div>
+
+    <!-- 底部说明小字（不喧宾夺主） -->
+    <div style="margin-top: 1.2rem; font-size: 0.8rem; color: #7c6653; opacity: 0.65; text-align: right; border-top: 1px solid #eddccb; padding-top: 0.8rem;">
+      信息页面 · 日常查询辅助
+    </div>
+  </div>
+</body>
+</html>
