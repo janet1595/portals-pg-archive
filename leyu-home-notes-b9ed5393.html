@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乐鱼 · 知识查询与对照平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f8f6f0;
+            color: #2e2b27;
+            font-family: "Georgia", "Noto Serif SC", "Times New Roman", serif;
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* hero / 主视觉 */
+        .hero {
+            background: #ece8e0;
+            padding: 3rem 2.5rem 2.8rem;
+            border-radius: 32px;
+            margin-bottom: 3.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid #e0dbd1;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #d6cfc0 2px, transparent 2px);
+            background-size: 16px 16px;
+            opacity: 0.20;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            color: #2c2823;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #4d473f;
+            max-width: 72%;
+            border-left: 4px solid #b7aa98;
+            padding-left: 1.6rem;
+            margin: 0.8rem 0 0.2rem;
+        }
+
+        @media (max-width: 580px) {
+            .hero {
+                padding: 2rem 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                max-width: 100%;
+                font-size: 1rem;
+                padding-left: 1.2rem;
+            }
+        }
+
+        /* 信息卡片区 —— 用途卡片 */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2e2b27;
+            margin: 2.8rem 0 1.6rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #d9d2c8;
+            display: inline-block;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 1.6rem 2rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02), 0 8px 24px rgba(0,0,0,0.02);
+            border: 1px solid #e7e1d7;
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbbfb0;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #302b25;
+            margin-bottom: 0.6rem;
+        }
+
+        .card p {
+            color: #4f4940;
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: #ece8e0;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            color: #4a443c;
+            letter-spacing: 0.02em;
+            margin-top: 0.5rem;
+        }
+
+        /* 引用块 / 提示框 */
+        .notice-box {
+            background: #e7e2d7;
+            border-left: 6px solid #ac9e8a;
+            padding: 1.8rem 2rem;
+            margin: 3rem 0 2.4rem;
+            border-radius: 12px 24px 24px 12px;
+            font-size: 1rem;
+            color: #3c3831;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5);
+        }
+
+        .notice-box strong {
+            font-weight: 600;
+            color: #26221c;
+        }
+
+        .notice-box a {
+            color: #6d5f4d;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            font-weight: 500;
+        }
+
+        .notice-box a:hover {
+            color: #362f26;
+        }
+
+        /* 适合人群小卡片 (行内风格) */
+        .audience-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.2rem;
+            margin-top: 0.4rem;
+            padding: 0.2rem 0;
+        }
+
+        .audience-item {
+            background: #ffffff;
+            border: 1px solid #e0d9ce;
+            border-radius: 40px;
+            padding: 0.3rem 1.2rem;
+            font-size: 0.9rem;
+            color: #3d3830;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        /* 自然链接段落 + faq摘要区 */
+        .link-paragraph {
+            background: #fcfaf6;
+            border: 1px solid #e2dbd0;
+            padding: 1.8rem 2rem;
+            border-radius: 28px;
+            margin: 2rem 0 1rem;
+        }
+
+        .link-paragraph p {
+            margin-bottom: 1rem;
+        }
+
+        .link-paragraph a {
+            color: #655846;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            font-weight: 500;
+        }
+
+        .link-paragraph a:hover {
+            color: #2f2a22;
+        }
+
+        .faq-mini {
+            margin-top: 2.8rem;
+        }
+
+        .faq-mini details {
+            background: #ffffff;
+            border: 1px solid #e5ded3;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.8rem;
+            transition: 0.1s;
+        }
+
+        .faq-mini details[open] {
+            border-color: #c6baa9;
+            background: #fcfaf7;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            cursor: pointer;
+            color: #2c2822;
+            padding: 0.2rem 0;
+            list-style: none;
+        }
+
+        .faq-mini summary::marker {
+            color: #a0917e;
+        }
+
+        .faq-mini details p {
+            margin-top: 0.7rem;
+            color: #4b453c;
+            font-size: 0.95rem;
+            padding-left: 0.4rem;
+            border-left: 2px solid #d6cdbf;
+            padding-left: 1.2rem;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 480px) {
+            .hero p {
+                font-size: 0.95rem;
+            }
+            .card {
+                padding: 1.6rem 1.2rem;
+            }
+            .notice-box {
+                padding: 1.4rem 1.4rem;
+            }
+            .link-paragraph {
+                padding: 1.4rem 1.2rem;
+            }
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd7cb;
+            margin: 2.4rem 0 1.2rem;
+            opacity: 0.4;
+        }
+
+        .footer-note {
+            color: #6f685d;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 3rem;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 主视觉 HERO -->
+    <div class="hero">
+        <h1>乐鱼 · 信息对照与延伸</h1>
+        <p>从碎片查询到系统阅读——将查阅、对比、笔记串联为一个连贯的知识回路。</p>
+    </div>
+
+    <!-- 用途卡片 x3 -->
+    <div>
+        <div class="section-title">常见使用场景</div>
+        <div class="card-grid">
+            <div class="card">
+                <h3>快速查证</h3>
+                <p>不打断当前阅读流，在一个连贯的页面内完成术语、概念、数据的交叉确认，减少标签页反复切换。</p>
+                <span class="tag">对照 · 核实</span>
+            </div>
+            <div class="card">
+                <h3>延伸阅读</h3>
+                <p>围绕同一主题聚合不同来源的摘要与观点，在简短条目间建立上下文，提供比单一搜索更厚实的背景。</p>
+                <span class="tag">主题 · 脉络</span>
+            </div>
+            <div class="card">
+                <h3>轻量笔记</h3>
+                <p>利用卡片 + 引用块结构，将零散发现转化为可复用的知识点，适合个人整理与快速回顾。</p>
+                <span class="tag">摘录 · 组织</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示块 / 引用块 (介绍风格) -->
+    <div class="notice-box">
+        <strong>关于信息密度</strong><br>
+        本页面致力于在有限空间内呈现高密度的内容关联，而非堆砌超链接。每个卡片、每条引用都经过筛选，以支撑「查询 — 对照 — 延伸」的连贯动作。
+    </div>
+
+    <!-- 适合人群 (inline标签) -->
+    <div style="margin-top: 2rem;">
+        <div class="section-title" style="border-bottom: none; margin-bottom: 0.4rem;">适合这样的读者</div>
+        <div class="audience-list">
+            <span class="audience-item">📖 经常查阅多领域资料</span>
+            <span class="audience-item">🔗 需要对比不同信息源</span>
+            <span class="audience-item">📌 喜欢边阅读边整理要点</span>
+            <span class="audience-item">🧩 希望减少信息碎片感</span>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 (嵌入乐鱼) -->
+    <div class="link-paragraph">
+        <p>如果你习惯在阅读中频繁进行跨条目对照，会发现单一窗口的局限。<a href="https://leyu--home.com">乐鱼</a> 提供了一种介于搜索引擎与个人知识库之间的交互形式：你可以快速定位到某个概念的解释，同时保持对主阅读路径的感知。这种设计减少了上下文丢失带来的认知负担。</p>
+        <p>在测试中，不少使用者反馈“查一个词意外读完了三个相关卡片”——这正是信息对照带来的自然延伸。你可以在 <a href="https://leyu--home.com">乐鱼</a> 中体验这种结构：不再有突然跳转的割裂感，而是沿着主题边缘平滑过渡。</p>
+    </div>
+
+    <!-- FAQ 摘要 (简短) -->
+    <div class="faq-mini">
+        <div class="section-title" style="margin-top: 1rem;">常见疑问摘要</div>
+        <details>
+            <summary>与普通搜索相比，这里有什么不同？</summary>
+            <p>普通搜索通常返回独立页面列表，需要手动切换和比对。<a href="https://leyu--home.com">乐鱼</a> 更强调在同一个界面内展示相关概念、对照解读以及延伸条目，适合需要反复横跳的场景。</p>
+        </details>
+        <details>
+            <summary>适合用来做深度研究吗？</summary>
+            <p>可以作为前期快速构建认知地图的工具。页面内的卡片与引用块能帮你快速建立主题框架，之后再根据具体需求深入原始资料。</p>
+        </details>
+        <details>
+            <summary>内容更新频率如何？</summary>
+            <p>围绕高频查询与对照需求持续补充卡片条目，同时保留用户自行延伸阅读的空间。建议定期回看。</p>
+        </details>
+    </div>
+
+    <hr>
+
+    <div class="footer-note">
+        基于对照与延伸 —— <a href="https://leyu--home.com" style="color:#655846; text-decoration: underline; text-underline-offset:2px;">乐鱼</a>
+    </div>
+
+</div>
+</body>
+</html>
