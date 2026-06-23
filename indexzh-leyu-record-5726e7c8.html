@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品说明 · 乐鱼 | 日常查询、对照与延伸阅读</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f2f4f6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #1e2a3a;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1040px;
+            margin: 0 auto;
+        }
+
+        /* hero 区 — 简洁、留白充足 */
+        .hero {
+            text-align: center;
+            padding: 2.8rem 1rem 2rem;
+            border-bottom: 1px solid #dbe0e5;
+            margin-bottom: 2.4rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #142133;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            color: #4f5b6b;
+            border-top: 1px solid #d0d6dd;
+            display: inline-block;
+            padding-top: 0.4rem;
+            margin-top: 0.2rem;
+        }
+
+        .hero p {
+            max-width: 660px;
+            margin: 1rem auto 0;
+            font-size: 0.98rem;
+            color: #3d4a5a;
+        }
+
+        /* 卡片网格 */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2.4rem;
+        }
+
+        @media (min-width: 640px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e0e4ea;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
+            padding: 1.6rem 1.5rem;
+            transition: box-shadow 0.15s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1d2b3c;
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        .card p, .card ul {
+            font-size: 0.94rem;
+            color: #2c3a4b;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .card ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0.2rem;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eef2f6;
+            color: #1f2c3d;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.1rem 0.6rem;
+            border-radius: 40px;
+            margin-right: 0.4rem;
+            letter-spacing: 0.01em;
+            border: 1px solid #d7dde5;
+        }
+
+        .link-sentence {
+            background: #ffffff;
+            border: 1px solid #e2e7ed;
+            border-radius: 12px;
+            padding: 1.5rem 1.8rem;
+            margin: 2rem 0 1.6rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+            font-size: 0.96rem;
+            line-height: 1.7;
+            color: #1d2b3b;
+        }
+
+        .link-sentence a {
+            color: #1a3b5c;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #b7c4d2;
+            transition: border-color 0.1s, color 0.1s;
+        }
+
+        .link-sentence a:hover {
+            color: #0c233a;
+            border-bottom-color: #1a3b5c;
+        }
+
+        .faq-mini {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 2rem 0 1.2rem;
+        }
+
+        @media (min-width: 720px) {
+            .faq-mini {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .faq-item {
+            background: #ffffff;
+            border-radius: 10px;
+            border: 1px solid #e2e7ed;
+            padding: 1.2rem 1.3rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #19273b;
+            margin-bottom: 0.25rem;
+        }
+
+        .faq-item span {
+            font-size: 0.9rem;
+            color: #3d4b5e;
+        }
+
+        .note {
+            background: #f6f8fa;
+            border-left: 3px solid #9aa9bb;
+            padding: 0.9rem 1.2rem;
+            border-radius: 4px 8px 8px 4px;
+            font-size: 0.87rem;
+            color: #2f3d50;
+            margin: 2rem 0 1.2rem;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6e7d8f;
+            border-top: 1px solid #dce1e7;
+            padding-top: 1.6rem;
+            margin-top: 1.2rem;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #dce1e7;
+            margin: 1.2rem 0;
+        }
+
+        .badge-light {
+            background: #f0f3f7;
+            border-radius: 40px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.75rem;
+            color: #2b3b4f;
+            border: 1px solid #d4dbe3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- hero 摘要 -->
+    <div class="hero">
+        <h1>信息查询·对照·延伸</h1>
+        <div class="sub">产品说明 &nbsp;·&nbsp; 日常使用场景</div>
+        <p>提供结构化的内容入口，便于在阅读、研究或日常资料整理时快速检索与横向对照。页面围绕索引与参考设计，不替代原始来源，强调信息组织效率。</p>
+    </div>
+
+    <!-- 特点 + 亮点 卡片网格 -->
+    <div class="grid">
+        <div class="card">
+            <h3>📋 查询与对照</h3>
+            <p>条目按主题归类，支持平行对比。适合需要快速定位条目、对比表述差异或追踪上下文的使用者。列表样式简洁，减少视觉噪音。</p>
+            <ul>
+                <li>分类索引 + 内联标记</li>
+                <li>同类条目集中陈列</li>
+                <li>便于复制与二次引用</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>📎 延伸阅读结构</h3>
+            <p>页面内嵌相关参考与注解链接，从单一条目可自然过渡到关联内容。不堆砌外部链接，保持信息边界清晰。</p>
+            <ul>
+                <li>关联条目轻量提示</li>
+                <li>注释与主内容分区明确</li>
+                <li>适合做个人阅读笔记的基础框架</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>⚙️ 使用建议</h3>
+            <p>建议配合浏览器标签页分组或本地笔记工具使用。对于需要频繁回溯的内容，可固定此页作为起始参考点。</p>
+            <span class="tag">桌面端</span>
+            <span class="tag">移动端</span>
+            <span class="tag">深色模式兼容</span>
+        </div>
+        <div class="card">
+            <h3>📄 内容边界说明</h3>
+            <p>页面展示的摘要与对照信息仅为指引，不替代完整原始文档。使用者应通过来源链接获取最终内容。</p>
+            <p style="margin-top: 0.5rem; font-size: 0.88rem; color: #4b5a6d;"><span class="badge-light">⬤ 可信但克制的引用</span></p>
+        </div>
+    </div>
+
+    <!-- 自然嵌入链接的句子 -->
+    <div class="link-sentence">
+        <p>📌 如果你需要系统查阅某个主题下的条目与对照信息，可将 <a href="https://indexzh-leyu.com">乐鱼</a> 作为起点页面之一。页面以列表和分区卡片呈现，方便横向扫描与内容定位。</p>
+    </div>
+
+    <!-- FAQ 摘要（迷你） -->
+    <div style="margin: 1.6rem 0 0.8rem; font-size: 0.9rem; color: #334155; font-weight: 500; letter-spacing: 0.02em;">常见问题摘要</div>
+    <div class="faq-mini">
+        <div class="faq-item">
+            <strong>页面更新频率？</strong>
+            <span>内容依据上游数据调整，无固定周期。建议定期回查以获取最新条目编排。</span>
+        </div>
+        <div class="faq-item">
+            <strong>能否直接引用页面内容？</strong>
+            <span>可引用摘要与分类描述，但重要数据请核实原始出处。本页为索引性质，非原始发布源。</span>
+        </div>
+        <div class="faq-item">
+            <strong>移动端阅读体验如何？</strong>
+            <span>卡片流式布局，单列显示。点击链接与折叠区域均适配触控，字体大小跟随系统。</span>
+        </div>
+        <div class="faq-item">
+            <strong>是否有搜索功能？</strong>
+            <span>当前页面为静态展示，未集成搜索。推荐使用浏览器页面内查找（Ctrl+F / Cmd+F）。</span>
+        </div>
+    </div>
+
+    <!-- 提示区块 -->
+    <div class="note">
+        <strong style="font-weight: 600; font-size: 0.93rem;">📌 可信但克制的访问说明</strong><br>
+        本页为产品说明页，提供日常查询、对照与延伸阅读的结构指引。所有条目均保持客观描述，不包含诱导性表述或未经验证的主张。使用者应基于自身判断采纳信息。
+    </div>
+
+    <!-- 结尾 / 附加说明 -->
+    <div class="footer-note">
+        <span>索引参考页 · 内容版本 2025</span> 
+        <span style="margin: 0 0.6rem;">·</span> 
+        <span>界面基于浅灰背景与卡片分区</span>
+    </div>
+</div>
+</body>
+</html>
